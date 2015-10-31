@@ -11,4 +11,11 @@
         android:layout_width="match_parent">
     </ListView>
 
+    <TextView
+        android:id="@+id/error"
+        android:text="@string/error_occurred"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+    </TextView>
+
 </RelativeLayout>

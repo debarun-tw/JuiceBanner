@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,52 +18,45 @@ import retrofit.client.Response;
 public class ListViewActivity extends AppCompatActivity {
 
     private ListView listView;
+    private View noNetworkView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
-        listView = (ListView) findViewById(R.id.list);
-
-        final String[][] values = {new String[]{}};
+        setUpViews();
 
         getServer().getOrders(new Callback<String[]>() {
             @Override
-            public void success(String[] strings, Response response) {
-                System.out.println("********************sjkdhfkjsdh***" + response);
-                values[0] = strings;
+            public void success(final String[] strings, Response response) {
+                ListViewActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ListViewActivity.this,
+                                android.R.layout.simple_list_item_1, android.R.id.text1, strings);
+                        listView.setAdapter(adapter);
+                    }
+                });
             }
 
             @Override
             public void failure(RetrofitError error) {
-                System.out.println("********************" + error);
+                ListViewActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        noNetworkView.setVisibility(View.VISIBLE);
+                    }
+                });
             }
         });
+    }
 
-//        String[] values = new String[] { "Android List View",
-//                "Adapter implementation",
-//                "Simple List View In Android",
-//                "Create List View Android",
-//                "Android Example",
-//                "List View Source Code",
-//                "List View Array Adapter",
-//                "Android Example List View",
-//                "ksjfhsjhdk",
-//                "skjfks",
-//                "sfdkjshkdjh",
-//                "kshfkjshkdjfs",
-//                "skjfhksjhfkshfl",
-//                "shdkjfhskjf",
-//                "skdfjhskjdfks",
-//                "skjdhfksjhfks",
-//                "njhgdkjhgkdfn"
-//        };
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values[0]);
-
-        listView.setAdapter(adapter);
+    private void setUpViews() {
+        listView = (ListView) findViewById(R.id.list);
+        noNetworkView = findViewById(R.id.error);
+        noNetworkView.setVisibility(View.INVISIBLE);
     }
 
     private JuiceBannerApp getApp() {
