@@ -1,15 +1,12 @@
 package com.example.roobab.juicebanner;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -17,8 +14,21 @@ import retrofit.client.Response;
 
 public class ListViewActivity extends AppCompatActivity {
 
+    private static final int MSG_POLL = 101;
     private ListView listView;
     private View noNetworkView;
+
+    Handler H = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch(msg.what) {
+                case MSG_POLL:
+                    periodicOrderGetter();
+                    sendEmptyMessageDelayed(MSG_POLL, 5000);
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,11 @@ public class ListViewActivity extends AppCompatActivity {
 
         setUpViews();
 
+        H.sendEmptyMessage(MSG_POLL);
+
+    }
+
+    private void periodicOrderGetter() {
         getServer().getOrders(new Callback<String[]>() {
             @Override
             public void success(final String[] strings, Response response) {
