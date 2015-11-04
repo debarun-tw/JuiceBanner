@@ -1,20 +1,29 @@
 package com.example.roobab.juicebanner;
 
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class ListViewActivity extends AppCompatActivity {
+public class ListViewActivity extends Activity {
 
     private static final int MSG_POLL = 101;
+    private static final int MSG_REFRESH = 102;
+    private static final int MSG_ERROR = 103;
+    public static final int POLL_DELAY_MILLIS = 5000;
+    private static final String TAG = "JuiceBanner";
+
     private ListView listView;
     private View noNetworkView;
 
@@ -24,11 +33,20 @@ public class ListViewActivity extends AppCompatActivity {
             switch(msg.what) {
                 case MSG_POLL:
                     periodicOrderGetter();
-                    sendEmptyMessageDelayed(MSG_POLL, 5000);
+                    sendEmptyMessageDelayed(MSG_POLL, POLL_DELAY_MILLIS);
+                    break;
+
+                case MSG_REFRESH:
+                    adapter.addAll((String[]) msg.obj);
+                    break;
+
+                case MSG_ERROR:
+                    noNetworkView.setVisibility(View.VISIBLE);
                     break;
             }
         }
     };
+    private LastOrderAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,30 +64,22 @@ public class ListViewActivity extends AppCompatActivity {
         getServer().getOrders(new Callback<String[]>() {
             @Override
             public void success(final String[] strings, Response response) {
-                ListViewActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ListViewActivity.this,
-                                android.R.layout.simple_list_item_1, android.R.id.text1, strings);
-                        listView.setAdapter(adapter);
-                    }
-                });
+              H.obtainMessage(MSG_REFRESH, strings).sendToTarget();
             }
 
             @Override
             public void failure(RetrofitError error) {
-                ListViewActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        noNetworkView.setVisibility(View.VISIBLE);
-                    }
-                });
+                Log.e(TAG, "error : " + error);
+                H.sendEmptyMessage(MSG_ERROR);
             }
         });
     }
 
     private void setUpViews() {
         listView = (ListView) findViewById(R.id.list);
+        adapter = new LastOrderAdapter(this, new ArrayList<String>());
+        listView.setAdapter(adapter);
+
         noNetworkView = findViewById(R.id.error);
         noNetworkView.setVisibility(View.INVISIBLE);
     }

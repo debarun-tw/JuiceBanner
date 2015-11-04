@@ -7,7 +7,7 @@ import retrofit.RestAdapter;
 
 public class JuiceBannerApp extends Application {
 
-    private static final String KANJUICE_SERVER_URL = "http://10.4.23.127:8083";
+    private static final String KANJUICE_SERVER_URL = "http://192.168.0.53:8083";
     private RestAdapter restAdapter;
     private JuiceServer juiceServer;
 
@@ -20,6 +20,7 @@ public class JuiceBannerApp extends Application {
 
     private void setupRestAdapter() {
         restAdapter = new RestAdapter.Builder()
+                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(KANJUICE_SERVER_URL)
                 .build();
     }
