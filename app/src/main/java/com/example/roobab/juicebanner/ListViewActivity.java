@@ -37,7 +37,7 @@ public class ListViewActivity extends Activity {
                     break;
 
                 case MSG_REFRESH:
-                    adapter.addAll((String[]) msg.obj);
+                    adapter.addAll((ArrayList<Order>) msg.obj);
                     break;
 
                 case MSG_ERROR:
@@ -61,10 +61,10 @@ public class ListViewActivity extends Activity {
     }
 
     private void periodicOrderGetter() {
-        getServer().getOrders(new Callback<String[]>() {
+        getServer().getOrders(new Callback<ArrayList<Order>>() {
             @Override
-            public void success(final String[] strings, Response response) {
-              H.obtainMessage(MSG_REFRESH, strings).sendToTarget();
+            public void success(ArrayList<Order> orders, Response response) {
+                H.obtainMessage(MSG_REFRESH, orders).sendToTarget();
             }
 
             @Override
@@ -77,7 +77,7 @@ public class ListViewActivity extends Activity {
 
     private void setUpViews() {
         listView = (ListView) findViewById(R.id.list);
-        adapter = new LastOrderAdapter(this, new ArrayList<String>());
+        adapter = new LastOrderAdapter(this, new ArrayList<Order>());
         listView.setAdapter(adapter);
 
         noNetworkView = findViewById(R.id.error);

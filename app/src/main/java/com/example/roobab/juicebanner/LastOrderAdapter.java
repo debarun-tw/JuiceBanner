@@ -12,21 +12,21 @@ import java.util.Arrays;
 
 public class LastOrderAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<String> juices;
+    private ArrayList<Order> orders;
 
-    public LastOrderAdapter(Context context, ArrayList<String> strings) {
+    public LastOrderAdapter(Context context, ArrayList<Order> orders) {
         this.context = context;
-        juices = strings;
+        this.orders = orders;
     }
 
     @Override
     public int getCount() {
-        return juices.size();
+        return orders.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return juices.get(i);
+    public Order getItem(int i) {
+        return orders.get(i);
     }
 
     @Override
@@ -37,13 +37,13 @@ public class LastOrderAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View juiceItemView = view != null ? view : View.inflate(context, R.layout.juice_item, null);
-        ((TextView) juiceItemView.findViewById(R.id.english_name)).setText((String) getItem(i));
+        ((TextView) juiceItemView.findViewById(R.id.english_name)).setText(getItem(i).drinkName);
         return juiceItemView;
     }
 
-    public void addAll(String[] newJuices) {
-        juices.clear();
-        juices.addAll(Arrays.asList(newJuices));
+    public void addAll(ArrayList<Order> newOrders) {
+        orders.clear();
+        orders.addAll(newOrders);
         notifyDataSetChanged();
     }
 }
