@@ -37,7 +37,8 @@ public class LastOrderAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View juiceItemView = view != null ? view : View.inflate(context, R.layout.juice_item, null);
-        ((TextView) juiceItemView.findViewById(R.id.english_name)).setText(getItem(i).drinkName);
+        ((TextView) juiceItemView.findViewById(R.id.english_name)).setText(getItem(i).drinkName + " - " + getItem(i).quantity);
+        ((TextView) juiceItemView.findViewById(R.id.employee_name)).setText(getItem(i).employeeName);
         return juiceItemView;
     }
 
