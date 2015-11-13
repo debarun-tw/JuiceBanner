@@ -7,5 +7,5 @@
 /captures
 .idea/*
 *.iml
-app/app.iml
- JuiceBanner.iml
+/app/app.iml
+JuiceBanner.iml
