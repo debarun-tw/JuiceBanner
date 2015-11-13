@@ -1,6 +1,7 @@
 package com.example.roobab.juicebanner;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +15,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class ListViewActivity extends Activity {
+public class ListViewActivity extends MenuActivity {
 
     private static final int MSG_POLL = 101;
     private static final int MSG_REFRESH = 102;
@@ -48,7 +49,7 @@ public class ListViewActivity extends Activity {
     private LastOrderAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -88,8 +89,8 @@ public class ListViewActivity extends Activity {
         adapter = new LastOrderAdapter(this, new ArrayList<OrderItem>());
         listView.setAdapter(adapter);
 
-        noNetworkView = findViewById(R.id.error);
-        noNetworkView.setVisibility(View.INVISIBLE);
+//        noNetworkView = findViewById(R.id.error);
+//        noNetworkView.setVisibility(View.INVISIBLE);
     }
 
     private JuiceBannerApp getApp() {

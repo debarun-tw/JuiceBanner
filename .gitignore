@@ -8,4 +8,6 @@
 .idea/*
 *.iml
 /app/app.iml
-JuiceBanner.iml
+/JuiceBanner.iml
+.idea
+/app/*.iml
