@@ -35,7 +35,8 @@ public class ListViewActivity extends Activity {
                     break;
 
                 case MSG_REFRESH:
-                    adapter.addAll((ArrayList<Order>) msg.obj);
+                    ArrayList<OrderItem> orderItems = decorateOrders((ArrayList<Order>) msg.obj);
+                    adapter.addAll(orderItems);
                     break;
 
                 case MSG_ERROR:
@@ -73,9 +74,18 @@ public class ListViewActivity extends Activity {
         });
     }
 
+    private ArrayList<OrderItem> decorateOrders(ArrayList<Order> orders) {
+        ArrayList<OrderItem> decoratedOrders = new ArrayList<>();
+        for(Order order : orders) {
+            decoratedOrders.add(new OrderItem(order.drinkName, order.employeeName, order.quantity,
+                    OrderDecorator.matchImage(order.drinkName)));
+        }
+        return decoratedOrders;
+    }
+
     private void setUpViews() {
         listView = (ListView) findViewById(R.id.list);
-        adapter = new LastOrderAdapter(this, new ArrayList<Order>());
+        adapter = new LastOrderAdapter(this, new ArrayList<OrderItem>());
         listView.setAdapter(adapter);
 
         noNetworkView = findViewById(R.id.error);
