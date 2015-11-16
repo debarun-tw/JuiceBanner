@@ -5,13 +5,14 @@
     <application
         android:name=".JuiceBannerApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name">
 
         <activity
             android:name=".ListViewActivity"
+            android:icon="@drawable/juice_banner"
             android:label="@string/app_name"
             android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,21 +22,26 @@
 
         <activity
             android:name=".MenuActivity"
-            android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".SummaryActivity"
-            android:label="@string/summary_activity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".AdminActivity"
             android:label="@string/admin_activity"
+            android:icon="@drawable/admin"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
+        <activity
+            android:name=".AdminActivity"
+            android:icon="@drawable/admin"
+            android:label="@string/availability"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 

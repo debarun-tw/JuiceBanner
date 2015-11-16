@@ -15,7 +15,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class ListViewActivity extends MenuActivity {
+public class ListViewActivity extends Activity {
 
     private static final int MSG_POLL = 101;
     private static final int MSG_REFRESH = 102;
@@ -89,8 +89,8 @@ public class ListViewActivity extends MenuActivity {
         adapter = new LastOrderAdapter(this, new ArrayList<OrderItem>());
         listView.setAdapter(adapter);
 
-//        noNetworkView = findViewById(R.id.error);
-//        noNetworkView.setVisibility(View.INVISIBLE);
+        noNetworkView = findViewById(R.id.error);
+        noNetworkView.setVisibility(View.INVISIBLE);
     }
 
     private JuiceBannerApp getApp() {

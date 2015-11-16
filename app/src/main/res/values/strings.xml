@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JuiceBanner</string>
+    <string name="app_name">Orders</string>
 
     <string name="action_settings">Settings</string>
 
@@ -7,7 +7,7 @@
 
     <string name="summary">Total Juices</string>
 
-    <string name="summary_activity">Juices Orders</string>
+    <string name="summary_activity">Orders</string>
     <string name="set_availability">Today\'s Summary</string>
     <string name="label_juice_name">Juice</string>
     <string name="label_qunatity">Quantity</string>
@@ -43,7 +43,7 @@
     <string name="unknown_kan"> </string>
     <string name="papaya">ಪರಂಗಿ ಹಣ್ಣು</string>
     <string name="custard_apple">ಸೀತಾಫಲ್ </string>
-    <string name="admin_activity">Set Juice Availability</string>
+    <string name="admin_activity">Admin</string>
     <string name="label_total_count">Total Count</string>
 
 </resources>
