@@ -1,14 +1,14 @@
 package com.example.roobab.juicebanner;
 
 public class Summary {
-    public String _id;
-    public int value;
+    public String name;
+    public String count;
 
     public String getName() {
-        return _id;
+        return name;
     }
 
-    public int getCount() {
-        return value;
+    public String getCount() {
+        return count;
     }
 }
