@@ -91,13 +91,11 @@ public class SummaryActivity extends MenuActivity {
                 TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT));
 
-        if(!totalCoffeeTeaCount.equals("0")) {
-            tr = new TableRow(this);
-            createTableRow(coffeeTeaRowName, totalCoffeeTeaCount);
-            tableView.addView(tr, new TableLayout.LayoutParams(
-                    TableRow.LayoutParams.FILL_PARENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
-        }
+        tr = new TableRow(this);
+        createTableRow(coffeeTeaRowName, totalCoffeeTeaCount);
+        tableView.addView(tr, new TableLayout.LayoutParams(
+                TableRow.LayoutParams.FILL_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
 
     }
 
