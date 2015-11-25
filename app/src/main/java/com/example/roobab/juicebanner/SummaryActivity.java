@@ -68,54 +68,72 @@ public class SummaryActivity extends MenuActivity {
     @SuppressWarnings({"rawtypes"})
     public void onSummaryReady(ArrayList<Summary> summaries) {
         addHeader();
-
+        int totalJuiceCount = 0, totalCoffeeTeaCount = 0;
         for (Summary summary : summaries) {
-
-            tr = new TableRow(this);
-            label = new TextView(this);
-            label.setTextSize(25);
-            label.setText(summary.getName());
-
-            label.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
-            label.setPadding(15, 15, 175, 15);
-            if (summary.getName().equals("totalCount")) {
-                label.setBackgroundColor(Color.parseColor("#00897B"));
-                label.setText(R.string.label_total_count);
-            } else {
-                label.setBackgroundColor(Color.GRAY);
+            if(!summary.getName().equals("CTL")) {
+                totalJuiceCount += Integer.parseInt(summary.getCount());
+                createRow(summary.getName(), summary.getCount());
+                addRowToTable();
             }
-
-            LinearLayout Ll = new LinearLayout(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
-                    TableRow.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 5, 5, 5);
-
-            Ll.addView(label, params);
-            tr.addView((View) Ll);
-            TextView place = new TextView(this);
-            place.setText(summary.getCount());
-            place.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
-
-            if (summary.getName().equals("totalCount")) {
-                place.setBackgroundColor(Color.parseColor("#00897B"));
-            } else {
-                place.setBackgroundColor(Color.GRAY);
+            else {
+                totalCoffeeTeaCount = Integer.parseInt(summary.getCount());
             }
-            place.setTextSize(25);
-            place.setPadding(15, 15, 175, 15);
-            Ll = new LinearLayout(this);
-            params = new LinearLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
-                    TableRow.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 5, 5, 5);
-
-            Ll.addView(place, params);
-            tr.addView((View) Ll);
-            tableView.addView(tr, new TableLayout.LayoutParams(
-                    TableRow.LayoutParams.FILL_PARENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
         }
+        createRow("Total Juice", "" + totalJuiceCount);
+        addRowToTable();
+        createRow("Coffee/Tea", "" + totalCoffeeTeaCount);
+        addRowToTable();
+    }
+
+    private void createRow(String name, String quantity) {
+        tr = new TableRow(this);
+        label = new TextView(this);
+        label.setTextSize(25);
+        label.setText(name);
+        label.setTextColor(Color.parseColor("#FFFFFF"));
+
+        label.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
+        label.setPadding(15, 15, 175, 15);
+        setBackgroundColor(name, label);
+
+        LinearLayout Ll = new LinearLayout(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 5, 5, 5);
+
+        Ll.addView(label, params);
+        tr.addView(Ll);
+        TextView place = new TextView(this);
+        place.setText(quantity);
+        place.setTextColor(Color.parseColor("#FFFFFF"));
+        place.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
+
+        setBackgroundColor(name, place);
+        place.setTextSize(25);
+        place.setPadding(15, 15, 175, 15);
+        Ll = new LinearLayout(this);
+        params = new LinearLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 5, 5, 5);
+
+        Ll.addView(place, params);
+        tr.addView(Ll);
+    }
+
+    private void setBackgroundColor(String name, TextView view) {
+        if (name.equals("Total Juice") || name.equals("Coffee/Tea")) {
+            view.setBackgroundColor(Color.parseColor("#00897B"));
+        } else {
+            view.setBackgroundColor(Color.GRAY);
+        }
+    }
+
+    private void addRowToTable() {
+        tableView.addView(tr, new TableLayout.LayoutParams(
+                TableRow.LayoutParams.FILL_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
     }
 
     void addHeader() {
@@ -125,6 +143,7 @@ public class SummaryActivity extends MenuActivity {
         TextView label = new TextView(this);
         label.setText(R.string.label_juice_name);
         label.setTextSize(25);
+        label.setTextColor(Color.parseColor("#FFFFFF"));
         label.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                 TableRow.LayoutParams.WRAP_CONTENT));
         label.setPadding(15, 15, 100, 15);
@@ -139,6 +158,7 @@ public class SummaryActivity extends MenuActivity {
 
         TextView place = new TextView(this);
         place.setTextSize(25);
+        place.setTextColor(Color.parseColor("#FFFFFF"));
         place.setText(R.string.label_qunatity);
         place.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                 TableRow.LayoutParams.WRAP_CONTENT));
@@ -151,8 +171,6 @@ public class SummaryActivity extends MenuActivity {
         Ll.addView(place, params);
         tr.addView((View) Ll);
 
-        tableView.addView(tr, new TableLayout.LayoutParams(
-                TableLayout.LayoutParams.FILL_PARENT,
-                TableLayout.LayoutParams.WRAP_CONTENT));
+        addRowToTable();
     }
 }
