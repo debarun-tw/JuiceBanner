@@ -68,10 +68,9 @@ public class SummaryActivity extends MenuActivity {
     @SuppressWarnings({"rawtypes"})
     public void onSummaryReady(ArrayList<Summary> summaries) {
         addHeader();
-        int totalJuiceCount = 0, totalCoffeeTeaCount = 0;
+        int totalCoffeeTeaCount = 0;
         for (Summary summary : summaries) {
             if(!summary.getName().equals("CTL")) {
-                totalJuiceCount += Integer.parseInt(summary.getCount());
                 createRow(summary.getName(), summary.getCount());
                 addRowToTable();
             }
@@ -79,8 +78,6 @@ public class SummaryActivity extends MenuActivity {
                 totalCoffeeTeaCount = Integer.parseInt(summary.getCount());
             }
         }
-        createRow("Total Juice", "" + totalJuiceCount);
-        addRowToTable();
         createRow("Coffee/Tea", "" + totalCoffeeTeaCount);
         addRowToTable();
     }
