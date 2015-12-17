@@ -12,13 +12,13 @@
     card_view:contentPadding="2dp">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="match_parent">
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:id="@+id/tile">
 
         <ImageView
             android:id="@+id/juice_image"
             android:layout_width="100dp"
             android:layout_height="80dp"
-            android:layout_marginTop="5dp"
             android:src="@drawable/strawberry" />
 
         <LinearLayout
@@ -29,9 +29,9 @@
             android:id="@+id/linearLayout">
 
             <LinearLayout
-                android:layout_width="253dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/english_name"
@@ -46,7 +46,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:weightSum="1">
 
@@ -61,14 +61,6 @@
                     android:layout_alignBottom="@+id/image"
                     android:layout_alignStart="@+id/english_name"
                         android:layout_weight="0.80" />
-
-                    <ImageView
-                        android:id="@+id/no_sugar_icon"
-                        android:layout_width="40sp"
-                        android:layout_height="40sp"
-                        android:src="@drawable/no_sugar_icon"
-                        android:visibility="gone"
-                        android:layout_gravity="top" />
 
                 </LinearLayout>
 
