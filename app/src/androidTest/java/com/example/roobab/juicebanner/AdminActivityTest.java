@@ -24,18 +24,18 @@ public class AdminActivityTest {
     @Test
     public void employeeNameShouldBeDisplayed() throws InterruptedException {
         Thread.sleep(2000);
-        onData(anything()).inAdapterView(withId(R.id.list_of_orders)).atPosition(0).onChildView(withId(R.id.employee_name)).check(matches(isDisplayed()));
+        onData(anything()).inAdapterView(withId(R.id.list)).atPosition(0).onChildView(withId(R.id.employee_name)).check(matches(isDisplayed()));
     }
 
     @Test
     public void juiceNameShouldBeDisplayed() throws InterruptedException {
         Thread.sleep(2000);
-        onData(anything()).inAdapterView(withId(R.id.list_of_orders)).atPosition(0).onChildView(withId(R.id.english_name)).check(matches(isDisplayed()));
+        onData(anything()).inAdapterView(withId(R.id.list)).atPosition(0).onChildView(withId(R.id.english_name)).check(matches(isDisplayed()));
     }
 
     @Test
     public void juiceImageShouldBeDisplayed() throws InterruptedException {
         Thread.sleep(2000);
-        onData(anything()).inAdapterView(withId(R.id.list_of_orders)).atPosition(0).onChildView(withId(R.id.juice_image)).check(matches(isDisplayed()));
+        onData(anything()).inAdapterView(withId(R.id.list)).atPosition(0).onChildView(withId(R.id.juice_image)).check(matches(isDisplayed()));
     }
 }

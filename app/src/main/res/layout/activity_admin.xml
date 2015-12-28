@@ -13,7 +13,7 @@ tools:context="com.example.roobab.juicebanner">
 
 
 <ListView
-    android:id="@+id/list_of_orders"
+    android:id="@+id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="25dp"

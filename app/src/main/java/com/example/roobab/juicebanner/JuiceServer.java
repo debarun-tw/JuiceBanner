@@ -6,10 +6,8 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.client.Response;
 import retrofit.http.Body;
-import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.POST;
-import retrofit.http.Path;
 
 public interface JuiceServer {
 
@@ -24,7 +22,4 @@ public interface JuiceServer {
 
     @GET("/api/beverages/juices")
     public void getJuices(Callback<List<Juice>> cb);
-
-    @DELETE("/api/orders/{id}")
-    public void deleteOrder(@Path("id") String _id, Callback<Response> cb);
 }
