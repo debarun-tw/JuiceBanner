@@ -44,7 +44,7 @@ public class AdminActivity extends MenuActivity implements CompoundButton.OnChec
 
 
     private void setupViews() {
-        ListView list = (ListView) findViewById(R.id.list);
+        ListView list = (ListView) findViewById(R.id.list_of_orders);
         adapter = new ListAvailAdapter(this, new ArrayList<Juice>());
         list.setAdapter(adapter);
     }

@@ -24,6 +24,12 @@ public class ListViewActivity extends Activity {
 
     private ListView listView;
     private View noNetworkView;
+    public deleteInterface deleteInterface= new deleteInterface() {
+        @Override
+        public void deleteOrder(String _id, Callback<Response> callback) {
+            getServer().deleteOrder(_id,callback);
+        }
+    };
 
     Handler H = new Handler() {
         @Override
@@ -78,14 +84,14 @@ public class ListViewActivity extends Activity {
         ArrayList<OrderItem> decoratedOrders = new ArrayList<>();
         for(Order order : orders) {
             decoratedOrders.add(new OrderItem(order.drinkName, order.employeeName, order.quantity,
-                    OrderDecorator.matchImage(order.drinkName), order.isSugarless));
+                    OrderDecorator.matchImage(order.drinkName), order.isSugarless, order._id));
         }
         return decoratedOrders;
     }
 
     private void setUpViews() {
-        listView = (ListView) findViewById(R.id.list);
-        adapter = new LastOrderAdapter(this, new ArrayList<OrderItem>());
+        listView = (ListView) findViewById(R.id.list_of_orders);
+        adapter = new LastOrderAdapter(this, new ArrayList<OrderItem>(),deleteInterface );
         listView.setAdapter(adapter);
 
         noNetworkView = findViewById(R.id.error);
