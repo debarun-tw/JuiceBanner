@@ -6,4 +6,5 @@ public class    Order {
     public String quantity;
     public boolean isSugarless;
     public String _id;
+    public boolean isFruit;
 }

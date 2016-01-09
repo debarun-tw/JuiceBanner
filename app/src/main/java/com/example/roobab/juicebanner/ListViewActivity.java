@@ -84,7 +84,7 @@ public class ListViewActivity extends Activity {
         ArrayList<OrderItem> decoratedOrders = new ArrayList<>();
         for(Order order : orders) {
             decoratedOrders.add(new OrderItem(order.drinkName, order.employeeName, order.quantity,
-                    OrderDecorator.matchImage(order.drinkName), order.isSugarless, order._id));
+                    OrderDecorator.matchImage(order.drinkName), order.isSugarless, order._id, order.isFruit));
         }
         return decoratedOrders;
     }

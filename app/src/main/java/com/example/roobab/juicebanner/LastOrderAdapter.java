@@ -50,8 +50,10 @@ public class LastOrderAdapter extends BaseAdapter {
         ((TextView) juiceItemView.findViewById(R.id.english_name)).setText(getItem(i).drinkName + " - " + getItem(i).quantity);
         ((TextView) juiceItemView.findViewById(R.id.employee_name)).setText(getItem(i).employeeName);
         ((ImageView) juiceItemView.findViewById(R.id.juice_image)).setImageResource(getItem(i).imageResId);
-        if (getItem(i).isSugarless)
-            juiceItemView.findViewById(R.id.tile).setBackgroundColor(Color.rgb(173, 255, 47));
+        if(getItem(i).isSugarless)
+            juiceItemView.findViewById(R.id.tile).setBackgroundColor(Color.rgb(173,255,47));
+        else if(getItem(i).isFruit)
+            juiceItemView.findViewById(R.id.tile).setBackgroundColor(Color.parseColor("#448AFF"));
         else
             juiceItemView.findViewById(R.id.tile).setBackgroundColor(Color.WHITE);
 
