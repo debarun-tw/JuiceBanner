@@ -85,13 +85,13 @@ public class SummaryActivity extends MenuActivity {
     private void createRow(String name, String quantity) {
         tr = new TableRow(this);
         label = new TextView(this);
-        label.setTextSize(25);
+        label.setTextSize(20);
         label.setText(name);
         label.setTextColor(Color.parseColor("#FFFFFF"));
 
         label.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,
                 TableRow.LayoutParams.WRAP_CONTENT));
-        label.setPadding(15, 15, 175, 15);
+        label.setPadding(15, 15, 75, 15);
         setBackgroundColor(name, label);
 
         LinearLayout Ll = new LinearLayout(this);
@@ -108,8 +108,8 @@ public class SummaryActivity extends MenuActivity {
                 TableRow.LayoutParams.WRAP_CONTENT));
 
         setBackgroundColor(name, place);
-        place.setTextSize(25);
-        place.setPadding(15, 15, 175, 15);
+        place.setTextSize(20);
+        place.setPadding(15, 15, 75, 15);
         Ll = new LinearLayout(this);
         params = new LinearLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
