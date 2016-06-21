@@ -3,6 +3,7 @@ package com.example.roobab.juicebanner;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -63,9 +64,12 @@ public class LastOrderAdapter extends BaseAdapter {
                 deleteInterface.deleteOrder(getItem(i)._id, new Callback<Response>() {
                     @Override
                     public void success(Response response, Response response2) {
-                        if (response.getStatus() == 200)
+                        if (response.getStatus() == 200) {
+                            Looper.prepare();
                             Toast.makeText(context, "Successfully deleted the order", Toast.LENGTH_SHORT).show();
+                        }
                         else
+                            Looper.prepare();
                             Toast.makeText(context, "Some internal error occured. Please try again", Toast.LENGTH_SHORT).show();
                     }
 
