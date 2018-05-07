@@ -65,7 +65,9 @@ public class LastOrderAdapter extends BaseAdapter {
                     @Override
                     public void success(Response response, Response response2) {
                         if (response.getStatus() == 200) {
-                            Looper.prepare();
+                            if(Looper.myLooper() == null) {
+                                Looper.prepare();
+                            }
                             Toast.makeText(context, "Successfully deleted the order", Toast.LENGTH_SHORT).show();
                         }
                         else
