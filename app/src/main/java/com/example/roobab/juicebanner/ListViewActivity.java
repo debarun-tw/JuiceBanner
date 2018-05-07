@@ -69,8 +69,10 @@ public class ListViewActivity extends Activity {
         getServer().getOrders(new Callback<ArrayList<Order>>() {
             @Override
             public void success(ArrayList<Order> orders, Response response) {
-                orders.remove(0);
-                orders.remove(1);
+                if(orders.size() > 2) {
+                    orders.remove(0);
+                    orders.remove(1);
+                }
                 H.obtainMessage(MSG_REFRESH, orders).sendToTarget();
             }
 
